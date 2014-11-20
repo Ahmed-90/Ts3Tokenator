@@ -14,8 +14,13 @@
          <children>
             <VBox prefHeight="600.0" prefWidth="255.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <ComboBox fx:id="srvList" prefWidth="240.0" />
-                  <Button mnemonicParsing="false" onAction="#deTheBug" prefHeight="31.0" prefWidth="237.0" text="Button" />
+                  <Label layoutX="20.0" layoutY="115.0" text="Server:" />
+                  <HBox spacing="5.0">
+                     <children>
+                        <ComboBox fx:id="srvList" prefHeight="31.0" prefWidth="180.0" />
+                        <Button mnemonicParsing="false" onAction="#deTheBug" prefHeight="31.0" prefWidth="74.0" text="Reload" />
+                     </children>
+                  </HBox>
                   <Separator prefWidth="200.0" />
                   <Label text="Token type:" />
                   <RadioButton fx:id="radTypeSG" mnemonicParsing="false" onAction="#typeChange" selected="true" text="Server Group">

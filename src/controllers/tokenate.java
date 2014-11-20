@@ -35,6 +35,7 @@ public class tokenate<E> implements TeamspeakActionListener{
 		
 		working = false;
 		gui = mainCtrl;
+		getServers();
 	}
 
 	@Override
@@ -63,19 +64,16 @@ public class tokenate<E> implements TeamspeakActionListener{
 	
 	public void getServers() {
 		// TODO Auto-generated method stub 
-		System.out.println(gui.srvList.getSelectionModel().selectedItemProperty().getValue());
+//		System.out.println(gui.srvList.getSelectionModel().selectedItemProperty().getValue());
 		String[] ts3 = query.doCommand("serverconnectionhandlerlist").get("response").split("\\|"); 
 		servers = new HashMap<String, String>();
-//		gui.srvList.getItems().clear();
+
 		for (int i = 0; i < ts3.length; i++) {
-//			System.out.println(ts3[i].substring(12));
-			
-			System.out.println(query.doCommand("use " + ts3[i]));
-			echoError();
+
+			query.doCommand("use " + ts3[i]);
 			String incom = query.doCommand("serverconnectinfo").get("response");
 			servers.put(query.parseLine(incom).get("ip"), ts3[i]);
 
-//			System.out.println(servers); 
 		}
 		Platform.runLater(new Runnable() {
 			public void run() {
@@ -84,26 +82,6 @@ public class tokenate<E> implements TeamspeakActionListener{
 				gui.srvList.getSelectionModel().selectFirst(); 
 			}
 		});
-		
-		
-		 
-//		gui.srvList.getItems().clear();
-//		for (int i = 0; i < ts3.length; i++) {
-//			System.out.println(ts3[i].substring(12));
-//
-//			System.out.println(query.doCommand("use " + ts3[i]));
-//			echoError();
-//			String incom = query.doCommand("serverconnectinfo").get("response");
-//
-//			Platform.runLater(new Runnable() {
-//				public void run() {
-//					 gui.srvList.getItems().add(query.parseLine(incom)); 
-//				}
-//			});
-//			System.out.println(); 
-//		}
-		
-		
 	}
 
 
@@ -120,6 +98,7 @@ public class tokenate<E> implements TeamspeakActionListener{
 				public void run() {
 					// TODO Auto-generated method stub
 					working = true;
+					query.doCommand("use " + servers.get(gui.srvList.getSelectionModel().selectedItemProperty().getValue()));
 					for (int i = 0; i < count; i++) {
 						query.doCommand("tokenadd tokentype=0 tokenid1=" + gid + " tokenid2=0");
 						echoError();
