@@ -81,7 +81,7 @@ public class tokenate<E> implements TeamspeakActionListener{
 			public void run() {
 				gui.srvList.getItems().clear();
 				gui.srvList.getItems().addAll(servers.keySet());
-				gui.srvList.getSelectionModel().selectFirst();
+				gui.srvList.getSelectionModel().selectFirst(); 
 			}
 		});
 		
