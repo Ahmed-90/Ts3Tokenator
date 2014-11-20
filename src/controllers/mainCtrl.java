@@ -69,10 +69,12 @@ public class mainCtrl implements Initializable {
 	@FXML
 	public ComboBox<Object> srvList;
 	
-	tokenate<Object> tok;
+	tokenate tok;
 	
 	public void deTheBug() {
 		// TODO Auto-generated method stub 
+
+		tok = new tokenate(this);
 		tok.getServers();
 	}
 
