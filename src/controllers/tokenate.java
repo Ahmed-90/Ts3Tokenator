@@ -1,8 +1,18 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Observable;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.util.Callback;
 import de.stefan1200.jts3serverquery.JTS3ServerQuery;
 import de.stefan1200.jts3serverquery.TeamspeakActionListener;
 
@@ -60,6 +70,39 @@ public class tokenate<E> implements TeamspeakActionListener{
 			
 		}
 		
+	}
+	
+	
+	public void getGroups() {
+		// TODO Auto-generated method stub
+		
+        // sample data
+//        Map<String, String> groups = new HashMap<>();
+
+//        
+//		if(working){
+//			return;
+//		}else {
+//			new Thread(new Runnable() {
+//				
+//				@Override
+//				public void run() {
+					// TODO Auto-generated method stub
+//					working = true;
+					query.doCommand("use " + servers.get(gui.srvList.getSelectionModel().selectedItemProperty().getValue()));
+					System.out.println(query.doCommand("whoami"));
+					System.out.println(query.doCommand("servergrouplist")); 
+						echoError(); 
+//				}
+//			}).start();			
+//		}
+
+
+
+//        ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(groups.entrySet());
+
+//        gui.listGroups.setItems(items); 
+
 	}
 	
 	public void getServers() {

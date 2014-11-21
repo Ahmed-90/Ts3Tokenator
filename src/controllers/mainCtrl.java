@@ -6,21 +6,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class mainCtrl implements Initializable {
 
@@ -39,7 +46,26 @@ public class mainCtrl implements Initializable {
 			
 		});
 		
-		 tok = new tokenate(this);
+		 tok = new tokenate<Object>(this);
+
+		 gid.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Map.Entry<String, String>, String>, ObservableValue<String>>() {
+
+	            @Override
+	            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<String, String>, String> p) {
+
+	                return new SimpleStringProperty(p.getValue().getKey());
+	            }
+	        });
+
+		 gname.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Map.Entry<String, String>, String>, ObservableValue<String>>() {
+
+	            @Override
+	            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<String, String>, String> p) {
+
+	                return new SimpleStringProperty(p.getValue().getValue());
+	            }
+	        });
+
 	}
 
 	@FXML
@@ -69,12 +95,29 @@ public class mainCtrl implements Initializable {
 	@FXML
 	public ComboBox<Object> srvList;
 	
-	tokenate tok;
+	@FXML
+	public TableView listGroups;
+	
+	@FXML
+	public TableColumn<Map.Entry<String, String>, String> gid;
+
+	@FXML
+	public TableColumn<Map.Entry<String, String>, String> gname;
+	
+	@FXML
+	public TableView listChannels;
+	
+	tokenate<?> tok;
 	
 	public void deTheBug() {
+		// TODO Auto-generated method stub
+		tok.getGroups();
+	}
+	
+	public void reServers() {
 		// TODO Auto-generated method stub 
 
-		tok = new tokenate(this);
+		tok = new tokenate<Object>(this);
 		tok.getServers();
 	}
 
